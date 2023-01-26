@@ -13,6 +13,10 @@ function setDepType(content: string, originalType: string): string {
     depType = 'python_requires';
   } else if (content.includes('build_require')) {
     depType = 'build_requires';
+  } else if (content.includes('test_require')) {
+    depType = 'build_requires';
+  } else if (content.includes('tool_require')) {
+    depType = 'build_requires';
   } else if (content.includes('requires')) {
     depType = 'requires';
   }

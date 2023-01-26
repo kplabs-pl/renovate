@@ -264,6 +264,20 @@ describe('modules/manager/conan/extract', () => {
           packageName: 'tool_win/0.1@user/stable',
           replaceString: 'tool_win/0.1@user/stable',
         },
+        {
+          currentValue: '1.2',
+          depName: 'req_l',
+          depType: 'build_requires',
+          packageName: 'req_l/1.2@drl/testing',
+          replaceString: 'req_l/1.2@drl/testing',
+        },
+        {
+          currentValue: '1.2',
+          depName: 'req_m',
+          depType: 'build_requires',
+          packageName: 'req_m/1.2@drl/testing',
+          replaceString: 'req_m/1.2@drl/testing',
+        },
       ]);
     });
   });
