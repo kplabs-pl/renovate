@@ -30,3 +30,6 @@ def requirements(self):
 def build_requirements(self):
    if self.settings.os == "Windows":
       self.build_requires("tool_win/0.1@user/stable")
+
+   self.test_requires('req_l/1.2@drl/testing')
+   self.tool_requires('req_m/1.2@drl/testing')
