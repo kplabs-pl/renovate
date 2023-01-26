@@ -144,6 +144,12 @@ export function replaceRange({
     }
     return `~${toVersionMajor}.${toVersionMinor}.0`;
   }
+  if (element.operator === '^') {
+    if (suffix.length) {
+      return `^${toVersionMajor}.${toVersionMinor}.${toVersionPatch}${suffix}`;
+    }
+    return `^${toVersionMajor}.${toVersionMinor}.0`;
+  }
   if (element.operator === '<=') {
     let res;
     if (!!element.patch || suffix.length) {
