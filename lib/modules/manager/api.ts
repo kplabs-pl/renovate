@@ -106,6 +106,7 @@ import * as unity3d from './unity3d';
 import * as velaci from './velaci';
 import * as vendir from './vendir';
 import * as woodpecker from './woodpecker';
+import * as kp_hatch from './kp-hatch';
 
 const api = new Map<string, ManagerApi>();
 export default api;
@@ -217,3 +218,4 @@ api.set('unity3d', unity3d);
 api.set('velaci', velaci);
 api.set('vendir', vendir);
 api.set('woodpecker', woodpecker);
+api.set('kp-hatch', kp_hatch);
