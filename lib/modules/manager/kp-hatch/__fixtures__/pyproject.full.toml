@@ -1,0 +1,60 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [
+    "hatchling==1.18.0",
+    "hatch-kp-version==0.2.0",
+]
+
+[project]
+name = "kp-oryx-scheduler"
+dynamic = [ "version" ]
+
+authors = [ { name = "KP Labs" } ]
+readme = "README.md"
+classifiers = [
+    "Private :: KP Labs",
+
+    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
+]
+description = "Scheduler"
+requires-python = ">=3.8"
+dependencies = [
+    'kp-oryx-utilities~=1.5',
+    'crcmod~=1.7',
+]
+
+[tool.hatch.version]
+source = "hatch-kp-version"
+
+[project.optional-dependencies]
+dev = [
+    'mypy==1.4.1',
+    'pytest~=7.0',
+]
+tool = [
+    'inflection~=0.5',
+    'django~=3.2',
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [ "tooling/kp_oryx" ]
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "sphinx~=6.1",
+  "flask~=1.2"
+]
+
+[tool.hatch.envs.dev]
+features = [ "dev" ]
+
+[tool.hatch.envs.dev.scripts]
+static_analysis = [
+    "flake8 --config=tooling/.flake8 tooling",
+    "mypy tooling/kp_oryx",
+    "mypy tooling/unit_tests",
+]
+tests = [
+    "pytest tooling/unit_tests"
+]

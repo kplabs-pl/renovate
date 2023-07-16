@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/manager/kp-hatch/extract extractPackageFile() empty 1`] = `[]`;
+
+exports[`modules/manager/kp-hatch/extract extractPackageFile() full 1`] = `
+[
+  {
+    "currentValue": "==1.18.0",
+    "datasource": "pypi",
+    "depName": "hatchling",
+    "depType": "devDependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "==0.2.0",
+    "datasource": "pypi",
+    "depName": "hatch-kp-version",
+    "depType": "devDependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "~=1.5",
+    "datasource": "pypi",
+    "depName": "kp-oryx-utilities",
+    "depType": "dependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "~=1.7",
+    "datasource": "pypi",
+    "depName": "crcmod",
+    "depType": "dependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "==1.4.1",
+    "datasource": "pypi",
+    "depName": "mypy",
+    "depType": "devDependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "~=7.0",
+    "datasource": "pypi",
+    "depName": "pytest",
+    "depType": "devDependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "~=0.5",
+    "datasource": "pypi",
+    "depName": "inflection",
+    "depType": "toolDependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "~=3.2",
+    "datasource": "pypi",
+    "depName": "django",
+    "depType": "toolDependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "~=6.1",
+    "datasource": "pypi",
+    "depName": "sphinx",
+    "depType": "docsEnvDependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "~=1.2",
+    "datasource": "pypi",
+    "depName": "flask",
+    "depType": "docsEnvDependencies",
+    "versioning": "pep440",
+  },
+]
+`;
