@@ -79,7 +79,7 @@ export class ConanDatasource extends Datasource {
     const conanPackage = getConanPackage(packageName);
     const revisionLookUp = joinUrlParts(
       url,
-      'v2/conans/',
+      'v1/conans/',
       conanPackage.conanName,
       newValue,
       conanPackage.userAndChannel,
@@ -123,7 +123,7 @@ export class ConanDatasource extends Datasource {
       const url = ensureTrailingSlash(registryUrl);
       const lookupUrl = joinUrlParts(
         url,
-        `v2/conans/search?q=${conanPackage.conanName}`,
+        `v1/conans/search?q=${conanPackage.conanName}`,
       );
 
       try {
@@ -164,7 +164,7 @@ export class ConanDatasource extends Datasource {
 
               const latestRevisionUrl = joinUrlParts(
                 url,
-                `v2/conans/${conanPackage.conanName}/${latestVersion}/${conanPackage.userAndChannel}/latest`,
+                `v1/conans/${conanPackage.conanName}/${latestVersion}/${conanPackage.userAndChannel}/latest`,
               );
               const {
                 body: { revision: packageRev },
