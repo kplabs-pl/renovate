@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/manager/kp-jenkins/extract extractPackageFile() empty 1`] = `[]`;
+
+exports[`modules/manager/kp-jenkins/extract extractPackageFile() full 1`] = `
+[
+  {
+    "currentValue": "==1.10.0",
+    "datasource": "pypi",
+    "depName": "hatch",
+    "depType": "withPipxInstalled",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "~=4.0.0",
+    "datasource": "pypi",
+    "depName": "pre-commit",
+    "depType": "withPipxInstalled",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": ">=1.0.2",
+    "datasource": "pypi",
+    "depName": "hatch",
+    "depType": "withPipxInstalled",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "==2.22.0",
+    "datasource": "pypi",
+    "depName": "cibuildwheel",
+    "depType": "withPipxInstalled",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "~=4.8.2",
+    "datasource": "pypi",
+    "depName": "kas",
+    "depType": "withPipxInstalled",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "<=0.36.0",
+    "datasource": "pypi",
+    "depName": "doit",
+    "depType": "withPipxInstalled",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": ">=1.9.2",
+    "datasource": "pypi",
+    "depName": "hatch",
+    "depType": "withPipxInstalled",
+    "versioning": "pep440",
+  },
+]
+`;
