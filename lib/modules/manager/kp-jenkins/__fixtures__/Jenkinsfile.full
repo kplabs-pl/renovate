@@ -1,0 +1,108 @@
+@Library('oryx-jpl') _
+
+pipeline {
+    agent(none)
+    options {
+        checkoutToSubdirectory('src')
+        parallelsAlwaysFailFast()
+    }
+
+    post {
+        failure {
+            script {
+                if (env.BRANCH_NAME == 'master') {
+                    failureMessage = "@${lastCommitAuthor} Project [*master*](${env.RUN_DISPLAY_URL}) build failed"
+                } else {
+                    failureMessage = "@${lastCommitAuthor} Project branch [${env.BRANCH_NAME}](${env.RUN_DISPLAY_URL}) build failed"
+                }
+            }
+            rocketSend emoji: ':flogger:', message: failureMessage, rawMessage: true, channel: 'project-notify'
+        }
+    }
+
+    stages {
+        stage('Stop old build') {
+            steps {
+                milestone(label: '', ordinal: Integer.parseInt(env.BUILD_ID) - 1)
+                milestone(label: '', ordinal: Integer.parseInt(env.BUILD_ID))
+            }
+        }
+
+        stage('Basic validation') {
+            agent { label('project-sw-build') }
+            steps {
+                withTimeout(time: 10, unit: 'MINUTES') {
+                    withPipxInstalled('3.13', ['hatch==1.10.0', 'pre-commit~=4.0.0']) {
+                        dir('src') {
+                            withGitPrivateKey('gitlab_global') {
+                                fetchTags('.')
+                            }
+                            script {
+                                lastCommitAuthor = getLastCommitAuthor(masterBranch: 'master')
+                            }
+                            checkCommits(masterBranch: 'master')
+                            runCommand('pre-commit run --from-ref origin/master --to-ref HEAD')
+                        }
+                        dir('build') {
+                            deleteDir()
+                            writeFile(file: '.lastCommitAuthor', text: lastCommitAuthor, encoding: 'UTF-8')
+                        }
+                        archiveArtifacts(artifacts: 'build/.lastCommitAuthor', fingerprint: false)
+                    }
+                }
+            }
+        }
+
+        stage ('Build documentation') {
+            agent { label 'miktex-docs-build' }
+
+            steps {
+                withTimeout(time: 10, unit: 'MINUTES') {
+                    dir('build') {
+                        deleteDir()
+                        unarchive(mapping: ['build/.lastCommitAuthor': '.lastCommitAuthor'])
+                        script {
+                            lastCommitAuthor = readFile(file: '.lastCommitAuthor', encoding: 'UTF-8')
+                        }
+                    }
+
+                    dir('src') {
+                        withGitPrivateKey('gitlab_global') {
+                            fetchTags('.')
+                        }
+                        withPipxInstalled('3.13', "hatch==${hatchVersion}") {
+                        }
+                        withEnv(["PATH+NODEJS_DIR=${env.NODE18_PATH}"]) {
+                            withPipxInstalled('3.13', ["hatch>=1.0.2",
+                                'cibuildwheel==2.22.0',
+                                'kas~=4.8.2', "doit<=0.36.0",
+                                ]) {
+                                withPipxInstalled('3.13', 'hatch>=1.9.2') {
+                                    runCommand('hatch env prune')
+                                    runCommand("hatch run build-docs-sphinx ${WORKSPACE}/build/docs/html")
+                                    runCommand("hatch run build-docs-sdd --build-folder=${WORKSPACE}/build/docs/")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            post {
+                success {
+                    publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: false,
+                        reportDir: 'build/docs/html',
+                        reportFiles: 'index.html',
+                        reportName: 'Docs',
+                        reportTitles: '',
+                        useWrapperFileDirectly: true
+                    ])
+                    archiveArtifacts('build/docs/*.pdf')
+                }
+            }
+        }
+    }
+}

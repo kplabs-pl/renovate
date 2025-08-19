@@ -107,6 +107,7 @@ import * as velaci from './velaci';
 import * as vendir from './vendir';
 import * as woodpecker from './woodpecker';
 import * as kp_hatch from './kp-hatch';
+import * as kp_jenkins from './kp-jenkins';
 
 const api = new Map<string, ManagerApi>();
 export default api;
@@ -219,3 +220,4 @@ api.set('velaci', velaci);
 api.set('vendir', vendir);
 api.set('woodpecker', woodpecker);
 api.set('kp-hatch', kp_hatch);
+api.set('kp-jenkins', kp_jenkins);
