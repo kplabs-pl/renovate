@@ -58,3 +58,6 @@ static_analysis = [
 tests = [
     "pytest tooling/unit_tests"
 ]
+
+[tool.hatch.env]
+requires = ['kp-hatch-qa==1.0.0']

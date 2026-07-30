@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`modules/manager/kp-hatch/extract extractPackageFile() empty 1`] = `[]`;
+exports[`modules/manager/kp-hatch/extract > extractPackageFile() > empty 1`] = `[]`;
 
-exports[`modules/manager/kp-hatch/extract extractPackageFile() full 1`] = `
+exports[`modules/manager/kp-hatch/extract > extractPackageFile() > full 1`] = `
 [
   {
     "currentValue": "==1.18.0",
@@ -72,6 +72,13 @@ exports[`modules/manager/kp-hatch/extract extractPackageFile() full 1`] = `
     "datasource": "pypi",
     "depName": "flask",
     "depType": "docsEnvDependencies",
+    "versioning": "pep440",
+  },
+  {
+    "currentValue": "==1.0.0",
+    "datasource": "pypi",
+    "depName": "kp-hatch-qa",
+    "depType": "devDependencies",
     "versioning": "pep440",
   },
 ]
